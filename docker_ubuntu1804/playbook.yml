@@ -2,18 +2,33 @@
 # DO Community Playbooks: Docker
 #################################################
 ---
-- hosts: all
+- hosts: linh_ubuntu_01
+  remote_user: root
   become: true
   vars_files:
     - vars/default.yml
 
   tasks:
     - name: Install aptitude using apt
-      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+      apt: 
+        name: aptitude
+        state: latest
+        update_cache: yes
+        force_apt_get: yes
 
     - name: Install required system packages
-      apt: name={{ item }} state=latest update_cache=yes
-      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
+      apt: 
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+      loop: 
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+        - python3-pip
+        - virtualenv
+        - python3-setuptools
 
     - name: Add Docker GPG apt Key
       apt_key:
@@ -26,7 +41,10 @@
         state: present
 
     - name: Update apt and install docker-ce
-      apt: update_cache=yes name=docker-ce state=latest
+      apt: 
+        update_cache: yes
+        name: docker-ce
+        state: latest
 
     - name: Install Docker Module for Python
       pip:
@@ -45,3 +63,20 @@
         command: "{{ default_container_command }}"
         state: present
       with_sequence: count={{ create_containers }}
+
+    # Install nodejs
+    - name: Install the gpg key for nodejs LTS
+      apt_key:
+        url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+        state: present
+
+    - name: Install the nodejs LTS repos
+      apt_repository:
+        repo: "deb https://deb.nodesource.com/node_{{ NODEJS_VERSION }}.x {{ ansible_distribution_release }} main"
+        state: present
+        update_cache: yes
+
+    - name: Install the nodejs
+      apt:
+        name: nodejs
+        state: present
