@@ -1,0 +1,11 @@
+---
+- hosts: tangai
+  remote_user: root
+  become: true
+
+  tasks:
+    - name: Ansible copy file to remote server
+      fetch:
+        src: /var/www
+        dest: /home/mrlinh/Documents/0.Learn Ansible/backup-tangai-server
+

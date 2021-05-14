@@ -1,0 +1,16 @@
+---
+- hosts: vultr-server-01
+  remote_user: root
+  become: true
+
+  tasks:
+    - name: Ansible copy file to remote server
+      copy:
+        src: /home/mrlinh/Documents/template_tan_gai/cat
+        dest: /var/www/cat
+    - name: Ansible copy file to remote server
+      copy:
+        src: /home/mrlinh/Documents/template_tan_gai/dog
+        dest: /var/www/dog
+
+
