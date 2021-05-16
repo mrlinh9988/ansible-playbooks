@@ -9,7 +9,11 @@
 
   tasks:
     - name: Install Prerequisites
-      apt: name=aptitude update_cache=yes state=latest force_apt_get=yes
+      apt: 
+        name: aptitude
+        update_cache: yes
+        state: latest
+        force_apt_get: yes
 
 # Sudo Group Setup
     - name: Make sure we have a 'wheel' group

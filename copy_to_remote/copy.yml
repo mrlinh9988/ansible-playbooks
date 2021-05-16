@@ -1,16 +1,16 @@
 ---
-- hosts: vultr-server-01
-  remote_user: root
+- hosts: vinhserver
+  remote_user: ubuntu
   become: true
 
   tasks:
     - name: Ansible copy file to remote server
       copy:
-        src: /home/mrlinh/Documents/template_tan_gai/cat
-        dest: /var/www/cat
+        src: /home/mrlinh/Documents/0.Vinh_Project/nginx
+        dest: /home/ubuntu/fpt
     - name: Ansible copy file to remote server
       copy:
-        src: /home/mrlinh/Documents/template_tan_gai/dog
-        dest: /var/www/dog
+        src: /home/mrlinh/Documents/0.Vinh_Project/docker-compose.yml
+        dest: /home/ubuntu/fpt
 
 

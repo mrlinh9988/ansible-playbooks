@@ -2,8 +2,8 @@
 # DO Community Playbooks: Docker
 #################################################
 ---
-- hosts: linh_ubuntu_01
-  remote_user: root
+- hosts: vinhserver
+  remote_user: ubuntu
   become: true
   vars_files:
     - vars/default.yml

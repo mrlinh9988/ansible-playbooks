@@ -1,0 +1,13 @@
+---
+- hosts: vultr-server-01
+  vars: 
+    jenkins_hostname: localhost
+    jenkins_admin_username: admin 
+    jenkins_admin_password: linhadmin
+  roles:
+    - role: geerlingguy.java
+      become: yes
+    - role: geerlingguy.jenkins
+      become: yes
+
+

@@ -1,0 +1,2 @@
+[vultr-server-01]
+45.77.40.186 ansible_ssh_user=root
